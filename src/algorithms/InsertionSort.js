@@ -11,8 +11,9 @@ const InsertionSort = (arr, delaySetArr) => {
             ];
             delaySetArr(arrCopy.slice(), count, index - 1);
             count++;
+            index--;
         }
-        index--;
+
     }
 };
 

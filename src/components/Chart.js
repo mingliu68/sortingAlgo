@@ -72,13 +72,14 @@ export default function Chart(props) {
         setQuantity(e.target.value);
     };
 
-    // const handleSortAlgo = (e) => {
-    //   //e.preventDefault();
-    //   setSortAlgo(e.target.value);
-    // };
+    const handleSortAlgo = (e) => {
+        e.preventDefault();
+        setSortAlgo(parseInt(e.target.value));
+    };
+
     useEffect(() => {
         generateArray();
-    }, [quantity]);
+    }, [quantity, sortAlgo]);
 
     return (
         <div style={{ width: "100%" }}>
@@ -107,11 +108,11 @@ export default function Chart(props) {
             <h4>{sortCollection[sortAlgo]}</h4>
             <button onClick={sortArr}> Start Sorting </button>
             <button onClick={generateArray}>Generate New Array</button>
-            {/* <select onChange={(e) => handleSortAlgo(e)}>
-        <option value="0">Bubble Sort</option>
-        <option value="1">Insertion Sort</option>
-        <option value="2">Selection Sort</option>
-      </select> */}
+            <select onChange={handleSortAlgo}>
+                <option key="0" value="0">Bubble Sort</option>
+                <option key="1" value="1">Insertion Sort</option>
+                <option key="2" value="2">Selection Sort</option>
+            </select>
 
             <label htmlFor="quantitySlider">Change Quantity</label>
             <input
@@ -121,7 +122,7 @@ export default function Chart(props) {
                 min={min}
                 max={max}
                 value={quantity}
-                onChange={(e) => handleQuantityChange(e)}
+                onChange={handleQuantityChange}
             />
             <label htmlFor="speedSlider">Change Speed</label>
             <input
@@ -131,7 +132,7 @@ export default function Chart(props) {
                 min={10}
                 max={200}
                 value={speed}
-                onChange={(e) => handleSpeedChange(e)}
+                onChange={handleSpeedChange}
                 style={{ transformOrigin: "50% 50%", transform: "rotate(-180deg)" }}
             />
         </div>
