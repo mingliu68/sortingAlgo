@@ -1,0 +1,28 @@
+
+.chartFrame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.chartFrame > div {
+    flex: 1;
+    
+}
+
+.chartTitle {
+    background: black;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.chart {
+    width: 100%;
+    /*height: 300px;*/
+    display: flex;
+    align-items: flex-end;
+    background: blanchedalmond;
+}

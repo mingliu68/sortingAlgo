@@ -1,0 +1,46 @@
+/* footer {
+   
+    bottom:0;
+    width:100%;
+    background:white;
+}  */
+.footer-inner {
+  max-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  width: 100%;
+  /* z-index: 20;
+  bottom: 0 */
+}
+.footer-inner span {
+color: #111111;
+font-weight: 500;
+}
+.footer-inner span.heart{
+color: red;
+font-size: 16px;
+transform: scale(1.5, 1.5);
+display: inline-block;
+animation: blink 1.25s infinite;
+}
+
+span.diamond {
+    font-size:12px;
+    animation:none;
+    margin: 0 2px;
+}
+.footer-inner span.copyright {
+  font-size: 16px;
+  display: inline-block;
+  /* transform: scale(1.5,1.5); */
+  padding-right: 3px
+}
+.footer-inner span.at {
+  padding: 0 3px;
+}
+
+@keyframes blink{
+    to{opacity: .0;}
+  }

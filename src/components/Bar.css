@@ -1,0 +1,8 @@
+.bar {
+    margin-right: 1px;
+    min-width: 3px;
+}
+
+.bar:last-child {
+    margin-right: 0;
+}

@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
+import './Chart.css'
 // components
 import Bar from "./Bar";
+import Control from "./Control";
+import Footer from "./Footer";
 // algo
 import BubbleSort from "../algorithms/BubbleSort";
 import InsertionSort from "../algorithms/InsertionSort";
 import SelectionSort from "../algorithms/SelectionSort";
+import QuickSort from '../algorithms/QuickSort';
+import HeapSort from '../algorithms/HeapSort';
+import RadixSort from '../algorithms/RadixSort';
+import MergeSort from "../algorithms/MergeSort";
 
 export default function Chart(props) {
     const [arr, setArr] = useState([]);
@@ -15,6 +22,7 @@ export default function Chart(props) {
     const [sortCollection, setSortCollection] = useState(props.algoCollection);
     const [sortAlgo, setSortAlgo] = useState(0);
     const [activeBar, setActiveBar] = useState(0);
+    const [movement, setMovement] = useState(null);
 
     const delaySetArr = (arrCopy, i, active) => {
         setTimeout(() => {
@@ -22,6 +30,13 @@ export default function Chart(props) {
             setArr(arrCopy);
         }, i * speed);
     };
+
+    const delaySetMovement = (count, i, minpoint) => {
+        setTimeout(() => {
+            setMovement(i);
+            setActiveBar(minpoint);
+        }, count * speed)
+    }
 
     const sortArr = () => {
         clearTimeout();
@@ -33,17 +48,19 @@ export default function Chart(props) {
                 InsertionSort(arr, delaySetArr);
                 break;
             case 2:
-                SelectionSort(arr, delaySetArr);
+                SelectionSort(arr, delaySetArr, delaySetMovement);
                 break;
             case 3:
+                QuickSort();
                 break;
             case 4:
+                HeapSort();
                 break;
             case 5:
+                RadixSort();
                 break;
             case 6:
-                break;
-            case 7:
+                MergeSort();
                 break;
             default:
                 BubbleSort(arr, delaySetArr);
@@ -56,6 +73,7 @@ export default function Chart(props) {
 
     const generateArray = () => {
         setActiveBar(0);
+        setMovement(null);
         let array = [];
         while (array.length <= quantity) {
             array.push(generateRandom(min, max));
@@ -72,25 +90,20 @@ export default function Chart(props) {
         setQuantity(e.target.value);
     };
 
-    const handleSortAlgo = (e) => {
+    const handleSortAlgo = (e, i) => {
+        //console.log(i)
         e.preventDefault();
-        setSortAlgo(parseInt(e.target.value));
+        setSortAlgo(i);
     };
 
     useEffect(() => {
         generateArray();
-    }, [quantity, sortAlgo]);
+    }, [quantity]);
 
     return (
-        <div style={{ width: "100%" }}>
-            <div
-                style={{
-                    width: "100%",
-                    height: "300px",
-                    display: "flex",
-                    alingItems: "flex-end"
-                }}
-            >
+        <div className="chartFrame">
+            <h1 className="chartTitle">{sortCollection[sortAlgo]}</h1>
+            <div className="chart">
                 {arr.length > 0
                     ? arr.map((bar, i) => {
                         return (
@@ -100,13 +113,27 @@ export default function Chart(props) {
                                 index={i}
                                 quantity={quantity}
                                 activeBar={activeBar}
+                                movement={movement}
+                                speed={speed}
                             />
                         );
                     })
                     : "Loading"}
             </div>
-            <h4>{sortCollection[sortAlgo]}</h4>
-            <button onClick={sortArr}> Start Sorting </button>
+            <Control
+                sortArr={sortArr}
+                generateArray={generateArray}
+                handleSortAlgo={handleSortAlgo}
+                min={min}
+                max={max}
+                quantity={quantity}
+                handleQuantityChange={handleQuantityChange}
+                speed={speed}
+                handleSpeedChange={handleSpeedChange}
+                sortCollection={sortCollection}
+                currentAlgo={sortAlgo}
+            />
+            {/* <button onClick={sortArr}> Start Sorting </button>
             <button onClick={generateArray}>Generate New Array</button>
             <select onChange={handleSortAlgo}>
                 <option key="0" value="0">Bubble Sort</option>
@@ -129,12 +156,13 @@ export default function Chart(props) {
                 id="speedSlider"
                 name="speedSlider"
                 type="range"
-                min={10}
+                min={20}
                 max={200}
                 value={speed}
                 onChange={handleSpeedChange}
                 style={{ transformOrigin: "50% 50%", transform: "rotate(-180deg)" }}
-            />
+            /> */}
+            <Footer />
         </div>
     );
 }

@@ -1,0 +1,73 @@
+.control {
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-height: 25%;
+}
+
+.control .buttonWrapper {
+    display: flex;
+    /* justify-content: space-evenly; */
+    flex-direction: row;
+    font-size: 1rem;
+    flex: 1
+}
+
+.activeAlgo {
+    background: orange;
+}
+
+.inactiveAlgo {
+    background: #555555;
+}
+
+.nonAlgoButton {
+    background: #555555;
+}
+.sortingButton {
+    background-color:darkgreen;
+}
+
+.control .button {
+    padding: 20px;
+    /* background: #555555; */
+    cursor: pointer;
+    border-right: white 1px solid;
+    border-top: white 1px solid;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    flex:1;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+}
+
+.control div.activeAlgo:hover, .control div.activeAlgo:active {
+    background-color:orangered;
+}
+
+.control div.nonAlgoButton:hover, .control div.inactiveAlgo:hover {
+    background-color: #333333;
+}
+
+.control div.nonAlgoButton:active, .control div.inactiveAlgo:active {
+    background: black;
+}
+
+.control div.sortingButton:hover {
+    background-color: green;
+}
+
+.control div.sortingButton:active {
+    background-color:forestgreen
+}
+
+
+
+
