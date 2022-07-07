@@ -1,4 +1,4 @@
-const BubbleSort = (arr, delaySetArr) => {
+const BubbleSort = (arr, delaySetArr, delaySetSorting) => {
     let arrCopy = arr.slice();
     let sorted = false;
     let count = 0;
@@ -14,6 +14,7 @@ const BubbleSort = (arr, delaySetArr) => {
             }
         }
     }
+    delaySetSorting(count);
 };
 
 export default BubbleSort;

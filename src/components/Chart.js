@@ -18,11 +18,13 @@ export default function Chart(props) {
     const [min, setMin] = useState(10);
     const [max, setMax] = useState(100);
     const [quantity, setQuantity] = useState(20);
-    const [speed, setSpeed] = useState(200);
+    const [speed, setSpeed] = useState(100);
     const [sortCollection, setSortCollection] = useState(props.algoCollection);
     const [sortAlgo, setSortAlgo] = useState(0);
     const [activeBar, setActiveBar] = useState(0);
     const [movement, setMovement] = useState(null);
+    const [sorting, setSorting] = useState(false);
+    const [tutorial, setTutorial] = useState(false);
 
     const delaySetArr = (arrCopy, i, active) => {
         setTimeout(() => {
@@ -38,17 +40,25 @@ export default function Chart(props) {
         }, count * speed)
     }
 
+    const delaySetSorting = (count) => {
+        setTimeout(() => {
+            count++;
+            setSorting(false);
+        }, count * speed);
+    }
+
     const sortArr = () => {
+        setSorting(true);
         clearTimeout();
         switch (sortAlgo) {
             case 0:
-                BubbleSort(arr, delaySetArr);
+                BubbleSort(arr, delaySetArr, delaySetSorting);
                 break;
             case 1:
-                InsertionSort(arr, delaySetArr);
+                InsertionSort(arr, delaySetArr, delaySetSorting);
                 break;
             case 2:
-                SelectionSort(arr, delaySetArr, delaySetMovement);
+                SelectionSort(arr, delaySetArr, delaySetMovement, delaySetSorting);
                 break;
             case 3:
                 QuickSort();
@@ -96,6 +106,10 @@ export default function Chart(props) {
         setSortAlgo(i);
     };
 
+    const handleTutorialToggle = (e) => {
+        e.preventDefault();
+        setTutorial(!tutorial);
+    }
     useEffect(() => {
         generateArray();
     }, [quantity]);
@@ -132,6 +146,9 @@ export default function Chart(props) {
                 handleSpeedChange={handleSpeedChange}
                 sortCollection={sortCollection}
                 currentAlgo={sortAlgo}
+                sorting={sorting}
+                tutorial={tutorial}
+                handleTutorialToggle={handleTutorialToggle}
             />
             {/* <button onClick={sortArr}> Start Sorting </button>
             <button onClick={generateArray}>Generate New Array</button>

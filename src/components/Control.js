@@ -1,12 +1,43 @@
 import "./Control.css";
 
-const Control = ({ sortArr, generateArray, handleSortAlgo, min, max, quantity, handleQuantityChange, speed, handleSpeedChange, sortCollection, currentAlgo }) => {
+const Control = ({ sortArr, generateArray, handleSortAlgo, min, max, quantity, handleQuantityChange, speed, handleSpeedChange, sortCollection, currentAlgo, sorting, tutorial, handleTutorialToggle }) => {
+    const sortingStyle =
+        sorting === true ?
+            { pointerEvents: "none", position: "relative" }
+            :
+            null
+
+    const tutorialStyle =
+        tutorial === true ?
+            { backgroundColor: "black", color: "white" }
+            :
+            null
+
     return (
-        <div className="control">
+        <div className="control" style={sortingStyle}>
+            {
+                sorting === true ?
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            background: "black",
+                            opacity: "60%",
+                            zIndex: 10,
+                            top: 0,
+                            left: 0,
+                            position: "absolute",
+                            transition: "2s",
+                        }}
+                    >
+                    </div>
+                    :
+                    null
+            }
             <div className="buttonWrapper">
                 <div className="button nonAlgoButton" onClick={generateArray}><h4>Generate Array</h4></div>
                 <div className="button slider nonAlgoButton">
-                    <label htmlFor="quantitySlider">Change Quantity</label>
+                    <label htmlFor="quantitySlider">Bars</label>
                     <input
                         id="quantitySlider"
                         name="quantitySlider"
@@ -18,7 +49,7 @@ const Control = ({ sortArr, generateArray, handleSortAlgo, min, max, quantity, h
                     />
                 </div>
                 <div className="button slider nonAlgoButton">
-                    <label htmlFor="speedSlider">Change Speed</label>
+                    <label htmlFor="speedSlider">Sorting Speed</label>
                     <input
                         id="speedSlider"
                         name="speedSlider"
@@ -29,9 +60,8 @@ const Control = ({ sortArr, generateArray, handleSortAlgo, min, max, quantity, h
                         onChange={handleSpeedChange}
                         style={{ transformOrigin: "50% 50%", transform: "rotate(-180deg)" }}
                     />
-
                 </div>
-                <div className="button nonAlgoButton"><h4>Tutorial Mode</h4></div>
+                <div className="button nonAlgoButton" style={tutorialStyle} onClick={handleTutorialToggle}><h4>Tutorial Mode</h4></div>
                 <div className="button sortingButton" onClick={sortArr}><h4>Start Sorting</h4></div>
 
             </div>

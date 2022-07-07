@@ -1,4 +1,4 @@
-const InsertionSort = (arr, delaySetArr) => {
+const InsertionSort = (arr, delaySetArr, delaySetSorting) => {
     let arrCopy = arr.slice();
     let count = 0;
 
@@ -15,6 +15,7 @@ const InsertionSort = (arr, delaySetArr) => {
         }
 
     }
+    delaySetSorting(count)
 };
 
 export default InsertionSort;

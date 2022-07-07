@@ -1,4 +1,4 @@
-const SelectionSort = (arr, delaySetArr, delaySetMovement) => {
+const SelectionSort = (arr, delaySetArr, delaySetMovement, delaySetSorting) => {
     let arrCopy = arr.slice();
     let count = 0;
     let minPoint;
@@ -17,6 +17,7 @@ const SelectionSort = (arr, delaySetArr, delaySetMovement) => {
         delaySetArr(arrCopy.slice(), count, minPoint);
         count++;
     }
+    delaySetSorting(count);
 };
 
 export default SelectionSort;
